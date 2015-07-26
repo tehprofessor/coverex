@@ -33,9 +33,11 @@ defmodule Coverex.Task do
           # :cover.analyse_to_file(mod, '#{output}/#{mod}.1.html', [:html])
           write_html_file(mod, output)
         end
+        Mix.shell.info "before missing files"
         {mods, funcs} = coverage_data()
         write_module_overview(mods, output)
         write_function_overview(funcs, output)
+        Mix.shell.info "after files"
         generate_assets(output)
         # ask for coveralls option
         if (running_travis?() and post_to_coveralls?(opts)) do
