@@ -121,14 +121,18 @@ defmodule Coverex.Task do
     end 
 
     def write_module_overview(modules, output) do
+      Mix.shell.info "Writing module overview: #{output}/modules.html"
       mods = Enum.map(modules, fn({mod, v}) -> {module_link(mod), v} end)
       content = overview_template("Modules", mods)
+      IO.puts content
       File.write("#{output}/modules.html", content)
     end
 
     def write_function_overview(functions, output) do
+      Mix.shell.info "Writing function overview: #{output}/functions.html"
       funs = Enum.map(functions, fn({{m,f,a}, v}) -> {module_link(m, f, a), v} end)
       content = overview_template("Functions", funs)
+      IO.puts content
       File.write("#{output}/functions.html", content)
     end
     
